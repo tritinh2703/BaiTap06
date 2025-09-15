@@ -48,4 +48,13 @@ public class CategoryDAO {
         q.setParameter("kw", "%" + keyword + "%");
         return q.getResultList();
     }
+
+    // === MỚI: Lấy category kèm danh sách video ===
+    public List<Category> findAllWithVideos() {
+        EntityManager em = JPAUtil.getEntityManager();
+        return em.createQuery(
+            "SELECT DISTINCT c FROM Category c LEFT JOIN FETCH c.videos",
+            Category.class
+        ).getResultList();
+    }
 }

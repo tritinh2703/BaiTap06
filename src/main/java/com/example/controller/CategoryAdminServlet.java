@@ -11,45 +11,40 @@ import java.util.List;
 
 @WebServlet("/admin/category")
 public class CategoryAdminServlet extends HttpServlet {
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private final CategoryDAO dao = new CategoryDAO();
+    private static final long serialVersionUID = 1L;
+    private final CategoryDAO dao = new CategoryDAO();
 
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-	        throws ServletException, IOException {
-	    String action = req.getParameter("action");
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        String action = req.getParameter("action");
 
-	    if ("edit".equals(action)) {
-	        String idParam = req.getParameter("id");
-	        if (idParam != null && !idParam.isEmpty()) {
-	            // Edit existing category
-	            int id = Integer.parseInt(idParam);
-	            req.setAttribute("cat", dao.find(id));
-	        }
-	        // Nếu id null => thêm mới, cat vẫn null => form rỗng
-	        req.getRequestDispatcher("/WEB-INF/views/category-form.jsp").forward(req, resp);
-	        return;
-	    }
+        if ("edit".equals(action)) {
+            String idParam = req.getParameter("id");
+            if (idParam != null && !idParam.isEmpty()) {
+                int id = Integer.parseInt(idParam);
+                req.setAttribute("cat", dao.find(id));
+            }
+            req.getRequestDispatcher("/WEB-INF/views/category-form.jsp").forward(req, resp);
+            return;
+        }
 
-	    if ("delete".equals(action)) {
-	        String idParam = req.getParameter("id");
-	        if (idParam != null && !idParam.isEmpty()) {
-	            dao.delete(Integer.parseInt(idParam));
-	        }
-	        resp.sendRedirect("category");
-	        return;
-	    }
+        if ("delete".equals(action)) {
+            String idParam = req.getParameter("id");
+            if (idParam != null && !idParam.isEmpty()) {
+                dao.delete(Integer.parseInt(idParam));
+            }
+            resp.sendRedirect("category");
+            return;
+        }
 
-	    String kw = req.getParameter("kw");
-	    List<Category> list = (kw != null && !kw.isEmpty())
-	            ? dao.searchByName(kw)
-	            : dao.findAll();
-	    req.setAttribute("list", list);
-	    req.getRequestDispatcher("/WEB-INF/views/category-list.jsp").forward(req, resp);
-	}
+        String kw = req.getParameter("kw");
+        List<Category> list = (kw != null && !kw.isEmpty())
+                ? dao.searchByName(kw)
+                : dao.findAllWithVideos();    // <-- lấy luôn video
+        req.setAttribute("list", list);
+        req.getRequestDispatcher("/WEB-INF/views/category-list.jsp").forward(req, resp);
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)

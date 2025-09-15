@@ -1,8 +1,8 @@
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <html>
-<head><title>Đăng nhập</title></head>
+<head><title>Login</title></head>
 <body>
-<h2>Đăng nhập</h2>
+<h2>Login</h2>
 <c:if test="${not empty error}">
   <p style="color:red">${error}</p>
 </c:if>
