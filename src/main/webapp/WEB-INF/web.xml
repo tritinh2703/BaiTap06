@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="https://jakarta.ee/xml/ns/jakartaee"
-	xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee http://java.sun.com/xml/ns/jakartaee/web-app_6_0.xsd"
-	version="6.0">
-	<display-name>BaiTap06</display-name>
-	<welcome-file-list>
-		<welcome-file>login.jsp</welcome-file>
-	</welcome-file-list>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee http://java.sun.com/xml/ns/jakartaee/web-app_6_0.xsd" version="6.0">
+  <display-name>BaiTap06</display-name>
+  <welcome-file-list>
+    <welcome-file>login.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>CategoryVideoServlet</display-name>
+    <servlet-name>CategoryVideoServlet</servlet-name>
+    <servlet-class>com.example.controller.CategoryVideoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CategoryVideoServlet</servlet-name>
+    <url-pattern>/CategoryVideoServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

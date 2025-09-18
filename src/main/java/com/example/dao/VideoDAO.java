@@ -48,4 +48,11 @@ public class VideoDAO {
         q.setParameter("kw", "%" + keyword + "%");
         return q.getResultList();
     }
+    public List<Video> findByCategory(int catId) {
+        EntityManager em = JPAUtil.getEntityManager();
+        TypedQuery<Video> q = em.createQuery(
+            "SELECT v FROM Video v WHERE v.category.id = :cid", Video.class);
+        q.setParameter("cid", catId);
+        return q.getResultList();
+    }
 }

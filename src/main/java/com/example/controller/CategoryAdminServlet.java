@@ -2,7 +2,6 @@ package com.example.controller;
 
 import com.example.dao.CategoryDAO;
 import com.example.entity.Category;
-
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
@@ -41,7 +40,7 @@ public class CategoryAdminServlet extends HttpServlet {
         String kw = req.getParameter("kw");
         List<Category> list = (kw != null && !kw.isEmpty())
                 ? dao.searchByName(kw)
-                : dao.findAllWithVideos();    // <-- lấy luôn video
+                : dao.findAllWithVideos();   // Lấy luôn video
         req.setAttribute("list", list);
         req.getRequestDispatcher("/WEB-INF/views/category-list.jsp").forward(req, resp);
     }

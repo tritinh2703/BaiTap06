@@ -15,7 +15,7 @@ public class Category {
 
     private String description;
 
-    // Quan hệ 1-N với Video
+    // Một Category có nhiều Video
     @OneToMany(mappedBy="category", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
     private List<Video> videos;
 

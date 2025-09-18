@@ -49,7 +49,6 @@ public class CategoryDAO {
         return q.getResultList();
     }
 
-    // === MỚI: Lấy category kèm danh sách video ===
     public List<Category> findAllWithVideos() {
         EntityManager em = JPAUtil.getEntityManager();
         return em.createQuery(
